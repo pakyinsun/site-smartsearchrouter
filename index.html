@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var q = params.get('q');
+  if (q !== null) {
+    var decoded = decodeURIComponent(q);
+    var wordCount = decoded.trim().split(/\s+/).filter(Boolean).length;
+    if (wordCount > 1) {
+      window.location.replace('https://www.perplexity.ai/search/new?q=' + encodeURIComponent(decoded) + '&focus=internet&copilot=true');
+    } else {
+      window.location.replace('https://www.google.com/search?q=' + encodeURIComponent(decoded) + '&udm=14');
+    }
+  }
+})();
+</script>
+</body>
+</html>
