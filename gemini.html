@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Redirect Router</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            
+            if (params.has('q')) {
+                const rawQuery = params.get('q');
+                const trimmedQuery = rawQuery.trim();
+                
+                if (trimmedQuery.length > 0) {
+                    const isMultipleWords = trimmedQuery.includes(' ');
+                    const encodedQuery = encodeURIComponent(trimmedQuery);
+                    
+                    if (isMultipleWords) {
+                        window.location.replace('https://www.perplexity.ai/search/new?q=' + encodedQuery + '&focus=internet&copilot=true');
+                    } else {
+                        window.location.replace('https://www.google.com/search?q=' + encodedQuery + '&udm=14');
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
